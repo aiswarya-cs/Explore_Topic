@@ -8,13 +8,20 @@
   let { children } = $props();
 
   const navItems = [
-    { name: "HOME", href: "/" },
-    { name: "Browse Topics", href: "#browse-topics" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "FAQ's", href: "#faq" },
-    { name: "Contact", href: "#contact-us" },
-    { name: "PAGES", href: "#" },
-  ];
+  { name: "HOME", href: "/" },
+  { name: "Browse Topics", href: "#browse-topics" },
+  { name: "How It Works", href: "#how-it-works" },
+  { name: "FAQ's", href: "#faq" },
+  { name: "Contact", href: "#contact-us" },
+  {
+    name: "PAGES",
+    href: "#",
+    children: [
+      { name: "Contact Us", href: "/contact-us" },
+      { name: "Topic Listing", href: "/topic-listing" },
+    ],
+  },
+];
 
   let scrolled = $state(false);
 
@@ -49,18 +56,37 @@
     </div>
     <ul class="hidden gap-8 lg:flex">
       {#each navItems as item}
-        <li
-          class="text-lg text-white hover:text-[#13547a] hover:decoration-2 hover:transition-all hover:duration-500 hover:ease-in-out relative group inline-block"
-        >
-          <a href={item.href}>
+        <li class="relative group">
+          <a
+            href={item.href}
+            class="text-lg text-white hover:text-[#13547a] hover:decoration-2 transition-all duration-500 ease-in-out inline-block"
+          >
             {item.name}
             <span
-              class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#13547a] transition-all duration-500 ease-initial group-hover:w-full"
+              class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#13547a] transition-all duration-500 group-hover:w-full"
             ></span>
           </a>
+    
+          {#if item.children}
+            <ul
+              class="absolute left-0 top-full mt-2 hidden group-hover:block bg-white shadow-md rounded-md min-w-[150px] z-50"
+            >
+              {#each item.children as child}
+                <li>
+                  <a
+                    href={child.href}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#13547a] hover:text-white"
+                  >
+                    {child.name}
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          {/if}
         </li>
       {/each}
     </ul>
+    
 
     <div>
       <Account data="w-9 h-9 md:flex fill-[#13547a]" />
@@ -72,21 +98,35 @@
   </nav>
 
   {#if isOpen}
-    <ul class="flex flex-col bg-[#13547a] p-5 gap-5 lg:hidden">
-      {#each navItems as item}
-        <li
-          class="text-lg text-white hover:text-[#13547a] hover:decoration-2 hover:transition-all hover:duration-500 hover:ease-in-out relative group inline-block"
+  <ul class="flex flex-col bg-[#13547a] p-5 gap-5 lg:hidden">
+    {#each navItems as item}
+      <li class="relative">
+        <a
+          href={item.href}
+          class="text-lg text-white hover:text-[#13547a] hover:decoration-2 transition-all duration-500 ease-in-out inline-block"
         >
-          <a href={item.href}>
-            {item.name}
-            <span
-              class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#13547a] transition-all duration-500 ease-initial group-hover:w-full"
-            ></span>
-          </a>
-        </li>
-      {/each}
-    </ul>
-  {/if}
+          {item.name}
+        </a>
+
+        {#if item.children}
+          <ul class="ml-4 mt-2">
+            {#each item.children as child}
+              <li>
+                <a
+                  href={child.href}
+                  class="block text-white text-sm py-1 hover:text-[#80d0c7]"
+                >
+                  {child.name}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </li>
+    {/each}
+  </ul>
+{/if}
+
 </div>
 
 {@render children()}

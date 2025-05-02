@@ -1,9 +1,16 @@
 <script lang="ts">
+
+  import Breadcrumb from "$lib/components/pages/breadcrumbs.svelte";
   interface Cards {
     name: string;
     paragraph: string;
     Image: string;
   }
+
+  const items = [
+    { title: "Home", href: "/" },
+    { title: "Topic Listing", href: "/topic-listing", active: true },
+  ];
 
   const designCards: Cards[] = [
     {
@@ -32,7 +39,9 @@
  flex flex-col md:flex-row justify-start items-center px-6 md:px-20"
 >
   <div>
-    <h1 class="text-white text-4xl md:text-6xl font-bold pt-40">
+    <Breadcrumb {items} />
+
+    <h1 class="text-white text-4xl md:text-6xl font-bold mt-5">
       Topics Listing
     </h1>
   </div>

@@ -14,8 +14,7 @@ const items = [
 >
   <div>
     <Breadcrumb {items} />
-
-    <h1 class="text-white text-4xl md:text-6xl font-bold pt-40">
+    <h1 class="text-white text-4xl md:text-6xl font-bold mt-3">
       Contact Form
     </h1>
   </div>
