@@ -21,7 +21,7 @@
           <svg
             class="w-4 h-4 mx-1 text-gray-400"
             fill="none"
-            stroke="currentColor"
+            stroke="currentC
             stroke-width="2"
             viewBox="0 0 24 24"
           >
